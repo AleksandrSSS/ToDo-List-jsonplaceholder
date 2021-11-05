@@ -1,0 +1,54 @@
+@import "./_vars";
+@import "./_reset";
+
+.todos__wrapper, .todos__length {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.todos__length {
+  & > span:not(:last-of-type) {
+    margin-right: 2rem;
+  }
+  // 
+  &-total {
+    font-size: 2.2rem;
+    color: rgb(58, 58, 58);
+    margin-bottom: 1.6rem;
+  }
+  &-completed {
+    font-size: 1.8rem;
+    color: teal;
+  }
+  &-uncompleted {
+    font-size: 1.8rem;
+    color: rgb(182, 100, 85);
+  }
+}
+
+.todo {
+  color: black;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid teal;
+  font-size: 2rem;
+  & > label {
+    min-width: 7.4rem;
+  }
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+  &__complited {
+    margin-right: .1rem;
+  }
+  &__text {
+    padding: 1rem;
+  }
+  &__delete {
+    border: 1px solid teal;
+    padding: 1rem;
+  }
+}

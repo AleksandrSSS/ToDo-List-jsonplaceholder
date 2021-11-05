@@ -1,0 +1,99 @@
+/*  */
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap);
+
+$OpenSans: 'Open Sans', sans-serif;
+//
+$base4 : 4px;
+$base6 : 6px;
+$base10 : 10px;
+$base20 : 20px;
+
+$colors: (
+  CodGray: #1D1D1D,
+  Tundora: #454545,
+  Tundora2: #919191,
+  primary: #FFFFFF,
+  warning: #FB9A01,
+  privatColor: #55b431,
+  RegentGray: #8F999F,
+  Gallery:#E1E6E9,
+
+  // 
+  light-black: lighten(#000, 30%),
+);
+/*  */
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+};
+// TODO: to Use in SASS
+// // //
+// selector {
+//   font-family: $Cabin;
+//   background-color: color(primary-light);
+// }
+
+// ************************************************
+// ! ============================================
+$phone: 601px;
+$tablet: 769px;
+$desktop: 841px;
+$descktopmiddle: 880px;
+$largedesktop: 992px;
+@mixin largedesktop {
+  @media screen and (max-width: #{$largedesktop}) {
+    @content;
+  }
+};
+@mixin descktopmiddle {
+  @media screen and (max-width: #{$descktopmiddle}) {
+    @content;
+  }
+};
+@mixin desktop {
+  @media screen and (max-width: #{$desktop}) {
+    @content;
+  }
+};
+@mixin tablet {
+  @media screen and (max-width: #{$tablet}) {
+    @content;
+  }
+};
+@mixin phone {
+  @media screen and (max-width: #{$phone}) {
+    @content;
+  }
+};
+// TODO: to Use in SASS
+// 
+// body {
+//   font-size: 2rem;
+//   /*  */
+
+  // @include descktopmiddle{
+  //   font-size: 1rem;
+  // }
+// }
+// ************************************************
+// ! 
+// $extra-large-web: 1700px;
+// $large-tablet-bp: 991px;
+// $tablet-bp: 768px;
+// $l-tablet-bp: 769px;
+// $phablet-bp: 576px;
+// $mobile-bp: 430px;
+// /*  */
+// @mixin breackpoint($bp) {
+//   @media screen and (max-width: $bp) {
+//     @content;
+//   }
+// }
+// @mixin breackpoint-min-width($bp) {
+//   @media screen and (min-width: $bp) {
+//     @content;
+//   }
+// }
+// TODO: to Use in SASS
+// @include breackpoint($large-tablet-bp) {
+//   display: none;
+// }
