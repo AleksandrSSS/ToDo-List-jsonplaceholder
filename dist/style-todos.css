@@ -485,7 +485,7 @@ body {
           box-sizing: border-box;
 }
 
-.todos__wrapper, .todos__length {
+.todos__wrapper, .todos__length, .todo__item {
   max-width: 80rem;
   margin: 0 auto;
   padding: 2rem;
@@ -541,10 +541,48 @@ body {
 }
 
 .todo__text {
+  width: 50rem;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.todo__text-wrapper {
   padding: 1rem;
+}
+
+.todo__text-wrapper > a {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #616161;
 }
 
 .todo__delete {
   border: 1px solid teal;
   padding: 1rem;
+}
+
+.todo__item {
+  line-height: 1.4;
+}
+
+.todo__item-check {
+  font-size: 1.6rem;
+}
+
+.todo__item-check > span:last-of-type {
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: teal;
+}
+
+.todo__item-text {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.todo__item-details {
+  font-size: 1.8rem;
 }

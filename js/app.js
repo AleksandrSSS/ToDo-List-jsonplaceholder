@@ -5,16 +5,19 @@ class Todo {
     this.title = options.title
     this.completed = options.completed
   }
-  renderTodo() {
+  renderTodos() {
     let flag1 = this.completed ? 'done' : 'do it'
     let flag2 = this.completed ? 'checked' : ''
     let item = `
     <div class="todo" data-id-item="${this.id}">
       <label for="item-${this.id}"><input class="todo__complited" data-id-check="${this.id}" type="checkbox" id="item-${this.id}" ${flag2}> <span>${flag1}</span></label>
-      <p class="todo__text" id="${this.userId}">${this.title}</p>
+      <div class="todo__text-wrapper">
+        <p class="todo__text" id="${this.userId}">${this.title}</p>
+        <a class="todo__link" data-id-link="${this.id}">details...</a>
+      </div>
       <button class="todo__delete" data-id-del="${this.id}">delete</button>
     </div> `
-    return item
+    return item // href="/detail.html" target="_blank"
   }
 }
 // 
@@ -24,33 +27,61 @@ document.addEventListener('click', (e) => {
   changeComplete(e)
   setTodosLength()
 })
-
-
+// 
+document.querySelectorAll('.todo__link').forEach(el => {
+  el.addEventListener('click', renderItemTodo)
+})
+// renderItemTodo()
+function renderItemTodo(e) {
+  let obj = Object.assign(findItemTodo(e, 'data-id-link'))//console.log(obj);
+  let itemString = JSON.stringify(obj)
+  localStorage.setItem('todo-item', itemString) 
+  window.location.href = '/detail.html';
+}
+// 
+function findItemTodo(e, attr) {
+  let arr = JSON.parse(localStorage.getItem('todo-items'))
+  let index = e.target.getAttribute(attr)//console.log(flag);
+  let res = arr.find( el => el.id == +index )
+  return res
+}
+// 
 function renderPage() {
   if (!localStorage.getItem('todo-items')) {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-    .then(response => response.json())
-    .then(json => { 
-      let todosString = JSON.stringify(json)
-      localStorage.setItem('todo-items', todosString)
-      return json
-    })
-    .then(data => { 
-      data.forEach(item => {
-        let todo = new Todo(item)
-        document.querySelector('.todos__wrapper').innerHTML += todo.renderTodo()
-      });
-      setTodosLength()
-    })
-    .catch(err => console.log(err))
+    getRequest()
   } else {
-    let arr = JSON.parse(localStorage.getItem('todo-items'))
-    arr.forEach(item => {
-      let todo = new Todo(item)
-      document.querySelector('.todos__wrapper').innerHTML += todo.renderTodo()
-    });
+    renderTodosFromState()
     setTodosLength()
   }
+}
+// 
+function getRequest() {
+  fetch('https://jsonplaceholder.typicode.com/todos')
+  .then(response => response.json())
+  .then(json => { 
+    let todosString = JSON.stringify(json)
+    localStorage.setItem('todo-items', todosString)
+    return json
+  })
+  .then(data => { 
+    data.forEach(item => {
+      let todo = new Todo(item)
+      document.querySelector('.todos__wrapper').innerHTML += todo.renderTodos()
+    });
+    setTodosLength()
+  })
+  .catch(err => console.log(err))
+}
+// 
+function renderTodosFromState() {
+  let arr = JSON.parse(localStorage.getItem('todo-items'))
+  arr.forEach(item => {
+    let todo = new Todo(item)
+    if (document.querySelector('.todos__wrapper')) {
+      
+      document.querySelector('.todos__wrapper').innerHTML += todo.renderTodos()
+    }
+  })
 }
 // 
 function changeComplete(e) {
@@ -92,7 +123,6 @@ function setTodosLength() {
   })
   document.querySelector('.todos__length-completed').innerHTML = `completed todos: ${completed}`
   document.querySelector('.todos__length-uncompleted').innerHTML = `uncompleted todos: ${uncompleted}`
-
 }
 
 
