@@ -36,7 +36,7 @@ function renderItemTodo(e) {
   let obj = Object.assign(findItemTodo(e, 'data-id-link'))//console.log(obj);
   let itemString = JSON.stringify(obj)
   localStorage.setItem('todo-item', itemString) 
-  window.location.href = '/detail.html';
+  window.location.href = './detail.html';
 }
 // 
 function findItemTodo(e, attr) {
