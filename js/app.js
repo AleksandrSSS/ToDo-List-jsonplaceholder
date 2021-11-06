@@ -13,7 +13,7 @@ class Todo {
       <label for="item-${this.id}"><input class="todo__complited" data-id-check="${this.id}" type="checkbox" id="item-${this.id}" ${flag2}> <span>${flag1}</span></label>
       <div class="todo__text-wrapper">
         <p class="todo__text" id="${this.userId}">${this.title}</p>
-        <a href="./detail.html" target="_blank" class="todo__link" data-id-link="${this.id}">details...</a>
+        <a class="todo__link" data-id-link="${this.id}">details...</a>
       </div>
       <button class="todo__delete" data-id-del="${this.id}">delete</button>
     </div> `
@@ -36,7 +36,7 @@ function renderItemTodo(e) {
   let obj = Object.assign(findItemTodo(e, 'data-id-link'))//console.log(obj);
   let itemString = JSON.stringify(obj)
   localStorage.setItem('todo-item', itemString) 
-  // window.location.href = './detail.html';
+  window.location.href = './detail.html';
 }
 // 
 function findItemTodo(e, attr) {
@@ -116,7 +116,7 @@ function setStorage(array) {
 // 
 function setTodosLength() {
   let arr = JSON.parse(localStorage.getItem('todo-items'))
-  document.querySelector('.todos__length-total').innerHTML = `You have ${arr.length} todos`
+  document.querySelector('.todos__length-total').innerHTML = document.querySelector('.todos__length-total') && `You have ${arr.length} todos`
   let completed = 0, uncompleted = 0;
   arr.forEach(el => {
     (el.completed == true) ? completed++ : uncompleted++
