@@ -13,7 +13,7 @@ class Todo {
       <label for="item-${this.id}"><input class="todo__complited" data-id-check="${this.id}" type="checkbox" id="item-${this.id}" ${flag2}> <span>${flag1}</span></label>
       <div class="todo__text-wrapper">
         <p class="todo__text" id="${this.userId}">${this.title}</p>
-        <a href="/detail.html" target="_blank" class="todo__link" data-id-link="${this.id}">details...</a>
+        <a href="./detail.html" target="_blank" class="todo__link" data-id-link="${this.id}">details...</a>
       </div>
       <button class="todo__delete" data-id-del="${this.id}">delete</button>
     </div> `
